@@ -20,7 +20,6 @@ app.get('/api/users', (req, res, next) => {
 })
 
 app.post('/api/users/create', (req, res, next) => {
-    console.log('HELLO')
     User.create({
         name: req.body.name,
         bio: req.body.bio,
@@ -38,6 +37,13 @@ app.delete('/api/users/:id', (req, res, next) => {
     })
     .then( () => res.sendStatus(204))
     .catch(next)
+})
+
+app.put('/api/users/:id', (req, res, next) => {
+    User.findByPk(req.params.id)
+        .then(user => user.update(req.body))
+        .then(user => res.send(user))
+        .catch(next)
 })
 
 app.listen(port, () => console.log(`listening on port ${port}`))

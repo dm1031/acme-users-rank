@@ -29,9 +29,9 @@ const fetchUsers = () => {
     }
 }
 
-const createUser = (user) => {
+const onSaveUser = (user) => {
     return (dispatch) => {
-        return axios.post('/api/users/create', user)
+        return axios[user.id ? 'put' : 'post'](`/api/users/${user.id ? user.id : 'create'}`, user)
             .then(() => dispatch(fetchUsers()))
             .catch(ex => console.log(ex.message))
     }
@@ -46,4 +46,4 @@ const destroyUser = (id) => {
 
 const store = createStore(reducer, applyMiddleware(thunk))
 export default store;
-export  { setUsers, fetchUsers, createUser, destroyUser }
+export  { setUsers, fetchUsers, onSaveUser, destroyUser }

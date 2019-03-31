@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { destroyUser } from './store';
 import { connect } from 'react-redux';
 
@@ -21,6 +22,7 @@ class Users extends Component {
                             </div>
                             <div>
                                 <button className="mt-2 btn btn-warning" type="submit" onClick={() => destroy(user.id)}>Delete</button>
+                                <Link to={`/users/${user.id}`} className="float float-right">Edit</Link>
                             </div>
                         </li>
                     )) : ''

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import React, { Component, Fragment } from 'react';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchUsers } from './store';
 
@@ -24,12 +24,17 @@ class App extends Component {
         }, [])
         return (
             <Router>
-                <h1>Acme Users With Ranks</h1>
-                <Route render={({ location }) => <Nav location={location} count={users.length} topRankedUsers={topRankedUsers} />} />
-                <Route exact path="/"  render={() => <Home count={users.length} /> } />
-                <Route exact path="/users" render={() => <Users users={users} /> } />
-                <Route exact path="/users/create" render={({ history }) => <UserForm history={history} /> } />
-                <Route exact path="/users/topRanked" render={() => <Users users={topRankedUsers}  /> } />
+                <h1>Acme Users With Ranks <i>by Dan</i></h1>
+                <Fragment>
+                    <Route render={({ location }) => <Nav location={location} count={users.length} topRankedUsers={topRankedUsers} />} />
+                    <Route path="/" exact render={() => <Home count={users.length} /> } />
+                    <Route path="/users" exact render={() => <Users users={users} /> } />
+                    <Switch>
+                        <Route path="/users/topRanked" exact render={() => <Users users={topRankedUsers}  /> } />
+                        <Route render={({ history }) => <UserForm history={history} /> } path="/users/create" exact />
+                        <Route render={({ history, match }) => <UserForm history={history} user={users.find(user => user.id === match.params.id * 1)} id={match.params.id} /> } path="/users/:id" exact />
+                    </Switch>
+                </Fragment>
             </Router>
         )
     }
