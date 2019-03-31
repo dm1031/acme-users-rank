@@ -2,9 +2,9 @@ import React from 'react';
 
 const Home = ({ count }) => {
     return (
-        <ul>
+        <div>
             We have {count} Users!
-        </ul>
+        </div>
     )
 }
 
