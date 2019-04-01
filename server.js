@@ -29,18 +29,18 @@ app.post('/api/users/create', (req, res, next) => {
     .catch(next)
 })
 
-app.delete('/api/users/:id', (req, res, next) => {
+app.delete('/api/users/:uuid', (req, res, next) => {
     User.destroy({
         where: {
-            id: req.params.id
+            uuid: req.params.uuid
         }
     })
     .then( () => res.sendStatus(204))
     .catch(next)
 })
 
-app.put('/api/users/:id', (req, res, next) => {
-    User.findByPk(req.params.id)
+app.put('/api/users/:uuid', (req, res, next) => {
+    User.findByPk(req.params.uuid)
         .then(user => user.update(req.body))
         .then(user => res.send(user))
         .catch(next)

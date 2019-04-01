@@ -32,7 +32,7 @@ class App extends Component {
                     <Switch>
                         <Route path="/users/topRanked" exact render={() => <Users users={topRankedUsers}  /> } />
                         <Route render={({ history }) => <UserForm history={history} /> } path="/users/create" exact />
-                        <Route render={({ history, match }) => <UserForm history={history} user={users.find(user => user.id === match.params.id * 1)} id={match.params.id} /> } path="/users/:id" exact />
+                        <Route render={({ history, match }) => <UserForm history={history} user={users.find(user => user.uuid === match.params.uuid)} uuid={match.params.uuid} /> } path="/users/:uuid" exact />
                     </Switch>
                 </Fragment>
             </Router>

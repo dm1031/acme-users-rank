@@ -31,15 +31,15 @@ const fetchUsers = () => {
 
 const onSaveUser = (user) => {
     return (dispatch) => {
-        return axios[user.id ? 'put' : 'post'](`/api/users/${user.id ? user.id : 'create'}`, user)
+        return axios[user.uuid ? 'put' : 'post'](`/api/users/${user.uuid ? user.uuid : 'create'}`, user)
             .then(() => dispatch(fetchUsers()))
             .catch(ex => console.log(ex.message))
     }
 }
 
-const destroyUser = (id) => {
+const destroyUser = (uuid) => {
     return (dispatch) => {
-        return axios.delete(`/api/users/${id}`)
+        return axios.delete(`/api/users/${uuid}`)
             .then( () => dispatch(fetchUsers()))
     }
 }

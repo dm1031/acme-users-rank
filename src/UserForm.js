@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class UserForm extends Component {
     constructor(props) {
         super(props)
-        if (!this.props.id) {
+        if (!this.props.uuid) {
             this.state = {
                 name: '',
                 bio: '',
@@ -22,7 +22,7 @@ class UserForm extends Component {
         }
     }
     componentDidUpdate(prevProps) {
-        if (!this.props.id && !prevProps.user && this.props.user) {
+        if (!this.props.uuid && !prevProps.user && this.props.user) {
             const user = this.props.user;
             this.setState({
                 name: user ? user.name : '',
@@ -32,10 +32,10 @@ class UserForm extends Component {
         }
     }
     render() {
-        const editing = !!this.props.id
+        const editing = !!this.props.uuid
         const { history, save } = this.props;
         const userToUpdate = {...this.state}
-        userToUpdate.id = this.props.id * 1;
+        userToUpdate.uuid = this.props.uuid;
         const fields = [
             'name', 'bio', 'rank'
         ]
