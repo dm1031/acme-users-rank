@@ -22,7 +22,8 @@ class UserForm extends Component {
         }
     }
     componentDidUpdate(prevProps) {
-        if (!this.props.uuid && !prevProps.user && this.props.user) {
+        console.log('the prevProps: ', prevProps)
+        if (this.props.uuid && !prevProps.user && this.props.user) {
             const user = this.props.user;
             this.setState({
                 name: user ? user.name : '',
@@ -32,6 +33,8 @@ class UserForm extends Component {
         }
     }
     render() {
+        console.log('the state: ', this.state)
+        console.log('the props: ', this.props)
         const editing = !!this.props.uuid
         const { history, save } = this.props;
         const userToUpdate = {...this.state}
